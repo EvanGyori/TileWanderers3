@@ -6,9 +6,11 @@
 
 #include "Item.h"
 #include "Weapon.h"
+#include "Shield.h"
 
 class Item;
 class Weapon;
+class Shield;
 
 class Player
 {
@@ -21,6 +23,7 @@ public:
 	void changeY(int deltaY);
 	
 	void setWeapon(const Weapon*);
+	void setShield(const Shield*);
 	
 	// Returns world coordinates of the player's position
 	int getX() const;
@@ -44,4 +47,5 @@ private:
 	
 	const Item* inventory[INVENTORY_SIZE];
 	const Weapon* weapon;
+	const Shield* shield;
 };

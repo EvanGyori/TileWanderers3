@@ -4,6 +4,8 @@
 
 #include "Chunk.h"
 #include "Item.h"
+#include "Weapon.h"
+#include "Shield.h"
 
 Player::Player(int x, int y) :
 	x(x), y(y),
@@ -30,6 +32,12 @@ void Player::setWeapon(const Weapon* weapon)
 {
 	assert(weapon != nullptr);
 	this->weapon = weapon;
+}
+
+void Player::setShield(const Shield* shield)
+{
+	assert(shield != nullptr);
+	this->shield = shield;
 }
 
 int Player::getX() const

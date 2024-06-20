@@ -19,7 +19,7 @@ public:
 	void equip(Player&) const;
 	
 	// Determines and returns damage based on the chance of a critical attack.
-	unsigned int computeDamage() const;
+	int computeDamage() const;
 
 private:
 	unsigned int damage;

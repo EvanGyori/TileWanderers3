@@ -26,12 +26,12 @@ void Weapon::equip(Player& player) const
 	player.setWeapon(this);
 }
 
-unsigned int Weapon::computeDamage() const
+int Weapon::computeDamage() const
 {
 	double rand = MyToolkit::randomDouble();
 	if (rand <= critChance) {
 		// Rounded up so that the critMultiplier still has an effect if it is low.
-		return static_cast<unsigned int>(std::ceil(damage * critMultiplier));
+		return static_cast<int>(std::ceil(damage * critMultiplier));
 	} else {
 		return damage;
 	}

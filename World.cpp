@@ -30,6 +30,25 @@ const World& World::operator=(const World& rhs)
 	return *this;
 }
 
+void World::replaceTile(int x, int y, const Tile* prototype)
+{
+	replacedTiles.push(getTile(x, y));
+	int chunkX = Chunk::posToChunkPos(x);
+	int chunkY = Chunk::posToChunkPos(y);
+	int tileX = Chunk::posToTilePos(x);
+	int tileY = Chunk::posToTilePos(y);
+	Chunk* chunk = getChunk(chunkX, chunkY);
+	chunk->setTile(tileX, tileY, prototype, false);
+}
+
+void World::cleanupReplacedTiles()
+{
+	while (!replacedTiles.empty()) {
+		delete replacedTiles.top();
+		replacedTiles.pop();
+	}
+}
+
 Chunk* World::getChunk(int x, int y)
 {
 	std::pair<int, int> key(x, y);

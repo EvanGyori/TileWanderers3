@@ -14,7 +14,7 @@ Database& Database::getInstance()
 	if (!instance) {
 		instance = new Database;
 	}
-	
+
 	return *instance;
 }
 

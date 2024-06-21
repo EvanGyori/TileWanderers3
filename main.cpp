@@ -3,7 +3,6 @@
 #include <ctime>
 #include <string>
 
-#include "World.h"
 #include "GameManager.h"
 
 int main()

@@ -4,14 +4,15 @@
 
 #include "Tile.h"
 #include "EmptyTile.h"
+#include "Database.h"
 
 AbandonedTownChunk::AbandonedTownChunk()
 {
 	// Temp - creates a chunk full of empty tiles
-	Tile* tiles[] = { new EmptyTile };
-	double probabilities[] = {1};
+	const Tile* tiles[] = { Database::getInstance().getTile(TILES::EMPTY) };
+	
+	double probabilities[] = {1.};
 	Chunk::generate(tiles, probabilities, 1);
-	delete tiles[0];
 }
 
 AbandonedTownChunk::AbandonedTownChunk(const Chunk& rhs) : Chunk(rhs)

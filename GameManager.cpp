@@ -1,10 +1,14 @@
 #include "GameManager.h"
 
+#include <cstdlib>
+#include <ctime>
+
 #include "Chunk.h"
 #include "World.h"
 #include "Player.h"
 #include "TileMediator.h"
 #include "InputBindings.h"
+#include "Database.h"
 
 GameManager::GameManager() :
 	player(Chunk::SIZE / 2, Chunk::SIZE / 2),
@@ -14,9 +18,11 @@ GameManager::GameManager() :
 
 void GameManager::run()
 {
+	srand(time(NULL));
 	menu();
 	tileMediator.revealArea(player.getX(), player.getY(), player.getSightRadius());
 	while (player.getHp() > 0) {
+		world.cleanupReplacedTiles();
 		update();
 	}
 	quit();

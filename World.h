@@ -8,6 +8,7 @@
 
 #include <unordered_map>
 #include <utility>
+#include <stack>
 
 #include "Chunk.h"
 #include "PairHash.h"
@@ -22,6 +23,15 @@ public:
 	
 	const World& operator=(const World&);
 	
+	// sets the tile at (x, y) in world coordinates to a copy of prototype
+	// Call cleanupReplacedTiles() to deallocate memory for replaced tiles
+	void replaceTile(int x, int y, const Tile* prototype);
+	
+	// Deallocates tiles that are no longer stored in any chunk.
+	// Since tiles replace themselves within their own methods on tile death,
+	// cleanupReplacedTiles needs to be called outside of their method.
+	void cleanupReplacedTiles();
+	
 	// Returns the chunk at (x, y) in chunk coordinates. If there is no chunk, one is created.
 	Chunk* getChunk(int x, int y);
 	
@@ -30,6 +40,7 @@ public:
 	
 private:
 	std::unordered_map<std::pair<int, int>, Chunk*, MyToolkit::IntegerPairHash> chunks;
+	std::stack<Tile*> replacedTiles;
 	
 	/*
 	 Creates a random chunk at the location.

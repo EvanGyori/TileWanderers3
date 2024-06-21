@@ -4,6 +4,7 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
+#include <cassert>
 
 #include "Characters.h"
 #include "Chunk.h"
@@ -39,6 +40,7 @@ void TileMediator::printMap() const
 		
 		// print tiles and player
 		for (int x = player.getX() - static_cast<int>(mapInradius); x <= player.getX() + static_cast<int>(mapInradius); x++) {
+			assert(world.getTile(x, y) != nullptr);
 			if (x == player.getX() && y == player.getY()) {
 				print(CHARS::PLAYER);
 			} else if (world.getTile(x, y)->isHidden()) {

@@ -30,11 +30,12 @@ const Chunk& Chunk::operator=(const Chunk& rhs)
 	return *this;
 }
 
-void Chunk::setTile(int x, int y, Tile* tile)
+void Chunk::setTile(int x, int y, const Tile* tile, bool deletePreviousTile)
 {
 	assert(0 <= x && x < SIZE && 0 <= y && y < SIZE && tile != nullptr);
-	delete tiles[x][y];
-	tiles[x][y] = tile;
+	if (deletePreviousTile)
+		delete tiles[x][y];
+	tiles[x][y] = tile->clone();
 }
 
 Tile* Chunk::getTile(int x, int y) const
@@ -43,13 +44,14 @@ Tile* Chunk::getTile(int x, int y) const
 	return tiles[x][y];
 }
 
-void Chunk::generate(Tile** tilePrototypes, double* probabilities, int len)
+void Chunk::generate(const Tile** tilePrototypes, double* probabilities, int len)
 {
 	for (int i = 0; i < SIZE; i++) {
 		for (int j = 0; j < SIZE; j++) {
 			double rand = MyToolkit::randomDouble();
 			for (int k = 0; k < len; k++) {
 				if (rand <= probabilities[k]) {
+					assert(tilePrototypes[k] != nullptr);
 					tiles[i][j] = tilePrototypes[k]->clone();
 					break;
 				} else {

@@ -26,9 +26,9 @@ public:
 	// Returns a copy of this object
 	virtual Chunk* clone() const = 0;
 	
-	// Sets the tile at (x, y) to the given tile pointer.
-	// The pointer must not be null and the class handles its destruction.
-	void setTile(int x, int y, Tile* tile);
+	// Sets the tile at (x, y) to a copy of the specified tile
+	// The pointer must not be null and should be a prototype as it is cloned
+	void setTile(int x, int y, const Tile* tile, bool deletePreviousTile);
 	
 	// Returns the name of the type of chunk. Each Chunk subclass has its own name.
 	virtual const char* getName() const = 0;
@@ -46,7 +46,7 @@ public:
 protected:
 	// Generates the tiles array using the given tiles with their associated probabilities
 	// The sum of all the probabilities must be equal to one and none should be negative
-	void generate(Tile** tilePrototypes, double* probabilities, int len);
+	void generate(const Tile** tilePrototypes, double* probabilities, int len);
 	
 private:
 	Tile* tiles[SIZE][SIZE];

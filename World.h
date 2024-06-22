@@ -25,7 +25,7 @@ public:
 	
 	// sets the tile at (x, y) in world coordinates to a copy of prototype
 	// Call cleanupReplacedTiles() to deallocate memory for replaced tiles
-	void replaceTile(int x, int y, const Tile* prototype);
+	void setTile(int x, int y, const Tile* prototype);
 	
 	// Deallocates tiles that are no longer stored in any chunk.
 	// Since tiles replace themselves within their own methods on tile death,

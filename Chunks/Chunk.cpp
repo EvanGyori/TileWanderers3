@@ -30,12 +30,12 @@ const Chunk& Chunk::operator=(const Chunk& rhs)
 	return *this;
 }
 
-void Chunk::setTile(int x, int y, const Tile* tile, bool deletePreviousTile)
+Tile* Chunk::setTile(int x, int y, const Tile* tile)
 {
 	assert(0 <= x && x < SIZE && 0 <= y && y < SIZE && tile != nullptr);
-	if (deletePreviousTile)
-		delete tiles[x][y];
+	Tile* originalTile = tiles[x][y];
 	tiles[x][y] = tile->clone();
+	return originalTile;
 }
 
 Tile* Chunk::getTile(int x, int y) const

@@ -28,7 +28,8 @@ public:
 	
 	// Sets the tile at (x, y) to a copy of the specified tile
 	// The pointer must not be null and should be a prototype as it is cloned
-	void setTile(int x, int y, const Tile* tile, bool deletePreviousTile);
+	// The original tile is returned and must be deallocated at some point
+	Tile* setTile(int x, int y, const Tile* tile, bool deletePreviousTile);
 	
 	// Returns the name of the type of chunk. Each Chunk subclass has its own name.
 	virtual const char* getName() const = 0;

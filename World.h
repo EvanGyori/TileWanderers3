@@ -16,6 +16,10 @@
 class World
 {
 public:
+	/*
+	 Default Constructor
+	 Initializes an empty world
+	*/
 	World();
 	World(const World&);
 
@@ -25,14 +29,27 @@ public:
 	
 	// sets the tile at (x, y) in world coordinates to a copy of prototype
 	// Call cleanupReplacedTiles() to deallocate memory for replaced tiles
+	
+	/*
+	 Sets the tile at (x, y) in world coordinates to a copy of prototype.
+	 The tile at the location is not deleted automatically. Call cleanupReplacedTiles to delete it.
+	 If no chunk is at the location, one is created.
+	 
+	 prototype must not be nullptr
+	*/
 	void setTile(int x, int y, const Tile* prototype);
 	
-	// Deallocates tiles that are no longer stored in any chunk.
-	// Since tiles replace themselves within their own methods on tile death,
-	// cleanupReplacedTiles needs to be called outside of their method.
+	/*
+	 Deallocates tiles that are no longer stored in any chunk.
+	 Since tiles replace themselves within their own methods on tile death,
+	 cleanupReplacedTiles needs to be called outside of their method.
+	*/
 	void cleanupReplacedTiles();
 	
-	// Returns the chunk at (x, y) in chunk coordinates. If there is no chunk, one is created.
+	/*
+	 Returns the chunk at (x, y) in chunk coordinates.
+	 If there is no chunk, one is created.
+	*/
 	Chunk* getChunk(int x, int y);
 	
 	// Returns the tile at (x, y) in world coordinates. If there is no chunk at the spot, one is created.

@@ -32,11 +32,14 @@ const World& World::operator=(const World& rhs)
 
 void World::setTile(int x, int y, const Tile* prototype)
 {
+	assert(prototype != nullptr);
 	int chunkX = Chunk::posToChunkPos(x);
 	int chunkY = Chunk::posToChunkPos(y);
 	int tileX = Chunk::posToTilePos(x);
 	int tileY = Chunk::posToTilePos(y);
 	Chunk* chunk = getChunk(chunkX, chunkY);
+	
+	// Does not delete replaced tile right away so that tiles can replace themselves
 	replacedTiles.push(chunk->setTile(tileX, tileY, prototype, false));
 }
 

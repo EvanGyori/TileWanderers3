@@ -30,11 +30,13 @@ const Chunk& Chunk::operator=(const Chunk& rhs)
 	return *this;
 }
 
-Tile* Chunk::setTile(int x, int y, const Tile* tile)
+Tile* Chunk::setTile(int x, int y, const Tile* prototype)
 {
-	assert(0 <= x && x < SIZE && 0 <= y && y < SIZE && tile != nullptr);
+	assert(0 <= x && x < SIZE && 0 <= y && y < SIZE && prototype != nullptr);
 	Tile* originalTile = tiles[x][y];
-	tiles[x][y] = tile->clone();
+	tiles[x][y] = prototype->clone();
+	
+	// Tile is returned rather than deleted so that tiles can replace themselves on death.
 	return originalTile;
 }
 
@@ -44,14 +46,35 @@ Tile* Chunk::getTile(int x, int y) const
 	return tiles[x][y];
 }
 
+int Chunk::posToChunkPos(int pos)
+{
+	if (pos >= 0) {
+		return pos / SIZE;
+	} else {
+		return (pos + 1) / SIZE - 1;
+	}
+}
+
+int Chunk::posToTilePos(int pos)
+{
+	if (pos >= 0) {
+		return pos % SIZE;
+	} else {
+		// Tweaks are to ensure that -8 to -1 outputs 0 to 7, -16 to -9 outputs 0 to 7 and so forth.
+		return SIZE - ((-1 * (pos + 1)) % SIZE) - 1;
+	}
+}
+
 void Chunk::generate(const Tile** tilePrototypes, double* probabilities, int len)
 {
+	assert(tilePrototypes != nullptr && probabilities != nullptr);
+
 	for (int i = 0; i < SIZE; i++) {
 		for (int j = 0; j < SIZE; j++) {
 			double rand = MyToolkit::randomDouble();
 			for (int k = 0; k < len; k++) {
 				if (rand <= probabilities[k]) {
-					assert(tilePrototypes[k] != nullptr);
+					assert(tilePrototypes[k] != nullptr && probabilities[k] >= 0);
 					tiles[i][j] = tilePrototypes[k]->clone();
 					break;
 				} else {
@@ -83,24 +106,5 @@ void Chunk::copy(const Chunk& chunk)
 			assert(tiles[i][j] == nullptr);
 			tiles[i][j] = chunk.tiles[i][j]->clone();
 		}
-	}
-}
-
-int Chunk::posToChunkPos(int pos)
-{
-	if (pos >= 0) {
-		return pos / SIZE;
-	} else {
-		return (pos + 1) / SIZE - 1;
-	}
-}
-
-int Chunk::posToTilePos(int pos)
-{
-	if (pos >= 0) {
-		return pos % SIZE;
-	} else {
-		// Tweaks are to ensure that -8 to -1 outputs 0 to 7, -16 to -9 outputs 0 to 7 and so forth.
-		return SIZE - ((-1 * (pos + 1)) % SIZE) - 1;
 	}
 }

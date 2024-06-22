@@ -75,3 +75,13 @@ const Item* Player::getInventoryItem(unsigned int index) const
 	assert(index < INVENTORY_SIZE);
 	return inventory[index];
 }
+
+const Weapon* Player::getWeapon() const
+{
+	return weapon;
+}
+
+const Shield* Player::getShield() const
+{
+	return shield;
+}

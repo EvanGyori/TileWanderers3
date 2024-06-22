@@ -27,6 +27,7 @@ void Shield::equip(Player& player) const
 int Shield::computeDamageReceived(int damage) const
 {
 	if (MyToolkit::randomDouble() <= blockChance) {
+		// Rounded up so that a shield with 100% block chance does not always output zero for small attacks.
 		return static_cast<int>(std::ceil(damage * (1 - blockPercentage)));
 	}
 	

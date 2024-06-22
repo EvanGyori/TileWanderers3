@@ -37,6 +37,8 @@ public:
 	unsigned int getGold() const;
 	
 	const Item* getInventoryItem(unsigned int index) const;
+	const Weapon* getWeapon() const;
+	const Shield* getShield() const;
 	
 private:
 	int x, y;

@@ -26,16 +26,23 @@ public:
 	// Returns a copy of this object
 	virtual Chunk* clone() const = 0;
 	
-	// Sets the tile at (x, y) to a copy of the specified tile
-	// The pointer must not be null and should be a prototype as it is cloned
-	// The original tile is returned and must be deallocated at some point
-	Tile* setTile(int x, int y, const Tile* tile, bool deletePreviousTile);
+	/*
+	 Sets the tile at (x, y) --in coordinates relative to the chunk-- to a copy of prototype.
+	 The tile originally at the location is returned and must be deallocated by the client.
+	 
+	 Prototype must not be nullptr.
+	 0 <= (x, y) <= Chunk::size
+	*/
+	Tile* setTile(int x, int y, const Tile* prototype, bool deletePreviousTile);
 	
 	// Returns the name of the type of chunk. Each Chunk subclass has its own name.
 	virtual const char* getName() const = 0;
 	
-	// Returns the tile at (x, y)
-	// 0 <= x, y < Chunk::size
+	/*
+	 Returns the tile at (x, y) in coordinates relative to the chunk.
+	 
+	 0 <= (x, y) < Chunk::size
+	*/
 	Tile* getTile(int x, int y) const;
 	
 	// Converts a world position into the coordinate of the chunk that is at that spot
@@ -47,6 +54,15 @@ public:
 protected:
 	// Generates the tiles array using the given tiles with their associated probabilities
 	// The sum of all the probabilities must be equal to one and none should be negative
+	
+	/*
+	 Generates the chunk's tiles array using the given tilePrototypes with their associated probabilities.
+	 
+	 The sum of probabilities must be equal to one and none be negative.
+	 tilePrototypes must not have any null pointers.
+	 len must match the size of the arrays.
+	 the arrays must not be null pointers themselves.
+	*/
 	void generate(const Tile** tilePrototypes, double* probabilities, int len);
 	
 private:
@@ -55,6 +71,10 @@ private:
 	// Deletes the tiles
 	void cleanup();
 	
-	// Copies the tiles from the given chunk into this
+	/*
+	 Copies the tiles from the given chunk into this
+	 
+	 Chunk must not have any uninitialized tiles. That being no nullptr tiles.
+	*/
 	void copy(const Chunk&);
 };

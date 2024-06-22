@@ -18,7 +18,7 @@ Weapon::Weapon(const char* name, unsigned int damage, double critChance, double 
 
 std::string Weapon::getLootTileDialog() const
 {
-	return getName();
+	return "weapon\n";
 }
 
 void Weapon::equip(Player& player) const
@@ -28,13 +28,12 @@ void Weapon::equip(Player& player) const
 
 int Weapon::computeDamage() const
 {
-	double rand = MyToolkit::randomDouble();
-	if (rand <= critChance) {
+	if (MyToolkit::randomDouble() <= critChance) {
 		// Rounded up so that the critMultiplier still has an effect if it is low.
 		return static_cast<int>(std::ceil(damage * critMultiplier));
-	} else {
-		return damage;
 	}
+	
+	return damage;
 }
 
 double Weapon::getAverageDamage() const

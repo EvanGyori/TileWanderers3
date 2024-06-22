@@ -69,6 +69,19 @@ void TileMediator::printInventory() const
 	}
 }
 
+void TileMediator::printBattle(EnemyTile* tile) const
+{
+	assert(tile != nullptr);
+	
+	// Temp
+	print(tile->getName());
+	print(": ");
+	print(tile->getHp());
+	print("\nPlayer: ");
+	print(player.getHp());
+	print("\n");
+}
+
 bool TileMediator::handleMovementInput()
 {
 	std::string inputStr;
@@ -108,6 +121,11 @@ void TileMediator::revealArea(int x, int y, int radius)
 			}
 		}
 	}
+}
+
+bool TileMediator::isPlayerDead() const
+{
+	return (player.getHp() > 0);
 }
 
 void TileMediator::print(std::string text, unsigned int millisecondsPerChar) const

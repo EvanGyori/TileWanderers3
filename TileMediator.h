@@ -8,6 +8,7 @@
 class World;
 class Player;
 class InputBindings;
+class EnemyTile;
 
 // Manipulate write position
 // https://stackoverflow.com/questions/27599233/how-to-manipulate-the-terminal-output-buffer-directly
@@ -25,7 +26,7 @@ public:
 	// Prints the player's inventory
 	void printInventory() const;
 	
-	//void printBattle(EnemyTile& tile) const; // TODO
+	void printBattle(EnemyTile* tile) const;
 	
 	// Asks the user for movement input and moves the player in that direction
 	// Returns false if an invalid input is given.
@@ -36,6 +37,8 @@ public:
 	
 	// Reveals the tiles in a circular area with the circle's origin at x and y
 	void revealArea(int x, int y, int radius);
+	
+	bool isPlayerAlive() const;
 	
 private:
 	World& world;

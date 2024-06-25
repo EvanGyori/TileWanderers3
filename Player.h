@@ -4,7 +4,9 @@
 
 #pragma once
 
-#include "Item.h"
+#include <vector>
+
+#include "Consumable.h"
 #include "Weapon.h"
 #include "Shield.h"
 
@@ -15,13 +17,13 @@ class Shield;
 class Player
 {
 public:
-	static constexpr unsigned int INVENTORY_SIZE = 10;
-
 	Player(int x, int y);
 	
 	void changeX(int deltaX);
 	void changeY(int deltaY);
 	
+	void addItemToInventory(const Consumable*);
+	void removeItemFromInventory(unsigned int index);
 	void setWeapon(const Weapon*);
 	void setShield(const Shield*);
 	
@@ -36,7 +38,8 @@ public:
 	
 	unsigned int getGold() const;
 	
-	const Item* getInventoryItem(unsigned int index) const;
+	const Consumable* getInventoryItem(unsigned int index) const;
+	int getInventorySize() const;
 	const Weapon* getWeapon() const;
 	const Shield* getShield() const;
 	
@@ -47,7 +50,7 @@ private:
 	int hp;
 	unsigned int gold;
 	
-	const Item* inventory[INVENTORY_SIZE];
+	std::vector<const Consumable*> inventory;
 	const Weapon* weapon;
 	const Shield* shield;
 };

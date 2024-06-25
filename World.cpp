@@ -40,7 +40,7 @@ void World::setTile(int x, int y, const Tile* prototype)
 	Chunk* chunk = getChunk(chunkX, chunkY);
 	
 	// Does not delete replaced tile right away so that tiles can replace themselves
-	replacedTiles.push(chunk->setTile(tileX, tileY, prototype, false));
+	replacedTiles.push(chunk->setTile(tileX, tileY, prototype));
 }
 
 void World::cleanupReplacedTiles()

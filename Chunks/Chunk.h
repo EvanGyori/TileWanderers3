@@ -33,7 +33,7 @@ public:
 	 Prototype must not be nullptr.
 	 0 <= (x, y) <= Chunk::size
 	*/
-	Tile* setTile(int x, int y, const Tile* prototype, bool deletePreviousTile);
+	Tile* setTile(int x, int y, const Tile* prototype);
 	
 	// Returns the name of the type of chunk. Each Chunk subclass has its own name.
 	virtual const char* getName() const = 0;

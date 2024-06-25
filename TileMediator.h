@@ -32,7 +32,7 @@ public:
 	// Returns false if an invalid input is given.
 	bool handleMovementInput();
 	
-	//void handleInventoryInput();
+	bool handleInventoryInput();
 	//void handleBattleInput();
 	
 	// Reveals the tiles in a circular area with the circle's origin at x and y

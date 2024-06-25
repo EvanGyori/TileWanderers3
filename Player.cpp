@@ -3,7 +3,7 @@
 #include <cassert>
 
 #include "Chunk.h"
-#include "Item.h"
+#include "Consumable.h"
 #include "Weapon.h"
 #include "Shield.h"
 
@@ -13,11 +13,9 @@ Player::Player(int x, int y) :
 	maxHp(100),
 	hp(100),
 	gold(0),
-	weapon(nullptr)
+	weapon(nullptr),
+	shield(nullptr)
 {
-	for (int i = 0; i < INVENTORY_SIZE; i++) {
-		inventory[i] = nullptr;
-	}
 }
 
 void Player::changeX(int deltaX) {
@@ -26,6 +24,16 @@ void Player::changeX(int deltaX) {
 
 void Player::changeY(int deltaY) {
 	y += deltaY;
+}
+
+void Player::addItemToInventory(const Consumable* item)
+{
+	inventory.push_back(item);
+}
+
+void Player::removeItemFromInventory(unsigned int index)
+{
+	inventory.erase(inventory.begin() + index);
 }
 
 void Player::setWeapon(const Weapon* weapon)
@@ -70,10 +78,15 @@ unsigned int Player::getGold() const
 	return gold;
 }
 
-const Item* Player::getInventoryItem(unsigned int index) const
+const Consumable* Player::getInventoryItem(unsigned int index) const
 {
-	assert(index < INVENTORY_SIZE);
+	assert(index < getInventorySize());
 	return inventory[index];
+}
+
+int Player::getInventorySize() const
+{
+	return inventory.size();
 }
 
 const Weapon* Player::getWeapon() const

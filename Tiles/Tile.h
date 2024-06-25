@@ -17,6 +17,8 @@ class Tile
 public:
 	Tile();
 
+	virtual ~Tile();
+
 	/*
 	 Handles gameplay loop. Run for the current tile on a loop.
 	 Make sure that any tile ends the method by moving the player

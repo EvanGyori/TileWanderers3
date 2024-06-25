@@ -5,6 +5,10 @@ Tile::Tile() :
 {
 }
 
+Tile::~Tile()
+{
+}
+
 void Tile::reveal()
 {
 	hidden = false;

@@ -6,6 +6,7 @@
 #include <chrono>
 #include <cassert>
 
+#include "EnemyTile.h"
 #include "Characters.h"
 #include "Chunk.h"
 #include "Player.h"
@@ -64,7 +65,8 @@ void TileMediator::printMap() const
 
 void TileMediator::printInventory() const
 {
-	for (int i = 0; i < Player::INVENTORY_SIZE; i++) {
+	std::cout << "Inventory\n";
+	for (int i = 0; i < player.getInventorySize(); i++) {
 		std::cout << (i + 1) << ": " << player.getInventoryItem(i)->getName() << std::endl;
 	}
 }
@@ -76,9 +78,9 @@ void TileMediator::printBattle(EnemyTile* tile) const
 	// Temp
 	print(tile->getName());
 	print(": ");
-	print(tile->getHp());
+	print(std::to_string(tile->getHp()));
 	print("\nPlayer: ");
-	print(player.getHp());
+	print(std::to_string(player.getHp()));
 	print("\n");
 }
 
@@ -107,6 +109,21 @@ bool TileMediator::handleMovementInput()
 	return moved;
 }
 
+bool TileMediator::handleInventoryInput()
+{
+	std::string input;
+	std::cin >> input;
+	int index = std::stoi(input);
+	if (0 < index && index <= player.getInventorySize()) {
+		index--;
+		player.getInventoryItem(index)->consume(player);
+		player.removeItemFromInventory(index);
+		return true;
+	}
+	
+	return bindings.checkInput(BINDINGS::EXIT_INVENTORY, &input[0]);
+}
+
 void TileMediator::revealArea(int x, int y, int radius)
 {
 	// Iterate over square that circumscribes the circle
@@ -123,7 +140,7 @@ void TileMediator::revealArea(int x, int y, int radius)
 	}
 }
 
-bool TileMediator::isPlayerDead() const
+bool TileMediator::isPlayerAlive() const
 {
 	return (player.getHp() > 0);
 }

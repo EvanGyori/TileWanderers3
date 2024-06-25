@@ -15,6 +15,7 @@ enum class BINDINGS
 	MOVE_LEFT,
 	MOVE_DOWN,
 	MOVE_RIGHT,
+	EXIT_INVENTORY,
 	COUNT // Do not use
 };
 

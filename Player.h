@@ -22,8 +22,11 @@ public:
 	void changeX(int deltaX);
 	void changeY(int deltaY);
 	
+	// Appends a consumable item to the inventory list
 	void addItemToInventory(const Consumable*);
+	
 	void removeItemFromInventory(unsigned int index);
+	
 	void setWeapon(const Weapon*);
 	void setShield(const Shield*);
 	

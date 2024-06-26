@@ -18,7 +18,7 @@ Weapon::Weapon(const char* name, unsigned int damage, double critChance, double 
 
 std::string Weapon::getLootTileDialog() const
 {
-	return "weapon\n";
+	return "Weapon\n";
 }
 
 void Weapon::equip(Player& player) const

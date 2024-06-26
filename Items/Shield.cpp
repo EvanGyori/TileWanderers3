@@ -16,7 +16,7 @@ Shield::Shield(const char* name, double blockChance, double blockPercentage) :
 
 std::string Shield::getLootTileDialog() const
 {
-	return "shield";
+	return "Shield\n";
 }
 
 void Shield::equip(Player& player) const

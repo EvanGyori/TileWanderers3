@@ -21,6 +21,7 @@ void GameManager::run()
 	srand(time(NULL));
 	menu();
 	tileMediator.revealArea(player.getX(), player.getY(), player.getSightRadius());
+	world.setTile(player.getX(), player.getY(), Database::getInstance().getTile(TILES::EMPTY));
 	while (player.getHp() > 0) {
 		world.cleanupReplacedTiles();
 		update();

@@ -18,12 +18,29 @@ Player::Player(int x, int y) :
 {
 }
 
-void Player::changeX(int deltaX) {
+void Player::changeHp(int deltaHp)
+{
+	hp += deltaHp;
+}
+
+void Player::changeX(int deltaX)
+{
 	x += deltaX;
 }
 
-void Player::changeY(int deltaY) {
+void Player::changeY(int deltaY)
+{
 	y += deltaY;
+}
+
+int Player::attack(int damage)
+{
+	if (shield != nullptr) {
+		damage = shield->computeDamageReceived(damage);
+	}
+	
+	changeHp(-1 * damage);
+	return damage;
 }
 
 void Player::addItemToInventory(const Consumable* item)
@@ -76,6 +93,11 @@ int Player::getHp() const
 unsigned int Player::getGold() const
 {
 	return gold;
+}
+
+int Player::computeAttackDamage() const
+{
+	return (weapon != nullptr) ? weapon->computeDamage() : 0;
 }
 
 const Consumable* Player::getInventoryItem(unsigned int index) const

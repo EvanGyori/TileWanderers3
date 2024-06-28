@@ -27,5 +27,7 @@ void InputBindings::setDefaultBindings()
 	setBinding(BINDINGS::MOVE_DOWN, "s");
 	setBinding(BINDINGS::MOVE_RIGHT, "d");
 	
+	setBinding(BINDINGS::OPEN_INVENTORY, "q");
 	setBinding(BINDINGS::EXIT_INVENTORY, "q");
+	setBinding(BINDINGS::ATTACK, "e");
 }

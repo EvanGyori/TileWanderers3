@@ -7,8 +7,6 @@ EnemyTile::~EnemyTile()
 void EnemyTile::update(TileMediator& mediator)
 {
 	while (mediator.isPlayerAlive() && getHp() > 0) {
-		mediator.clearConsole();
-		mediator.printBattle(this);
 		handlePlayersTurn(mediator);
 		handleTilesTurn(mediator);
 	}

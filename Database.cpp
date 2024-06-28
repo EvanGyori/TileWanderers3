@@ -2,6 +2,7 @@
 
 #include "Tile.h"
 #include "EmptyTile.h"
+#include "EnemyTileImpl.h"
 #include "Item.h"
 #include "Weapon.h"
 
@@ -49,6 +50,8 @@ Database::~Database()
 void Database::createTiles()
 {
 	addTile(TILES::EMPTY, new EmptyTile);
+	
+	addTile(TILES::ENEMY, new EnemyTileImpl("Test Enemy", 100, 10, getTile(TILES::EMPTY)));
 }
 
 void Database::createItems()

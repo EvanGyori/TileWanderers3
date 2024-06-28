@@ -9,10 +9,11 @@
 AbandonedTownChunk::AbandonedTownChunk()
 {
 	// Temp - creates a chunk full of empty tiles
-	const Tile* tiles[] = { Database::getInstance().getTile(TILES::EMPTY) };
+	Database& database = Database::getInstance();
+	const Tile* tiles[] = { database.getTile(TILES::EMPTY), database.getTile(TILES::ENEMY) };
 	
-	double probabilities[] = {1.};
-	Chunk::generate(tiles, probabilities, 1);
+	double probabilities[] = {0.8, 0.2};
+	Chunk::generate(tiles, probabilities, 2);
 }
 
 AbandonedTownChunk::AbandonedTownChunk(const Chunk& rhs) : Chunk(rhs)

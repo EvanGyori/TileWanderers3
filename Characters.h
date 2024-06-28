@@ -29,4 +29,5 @@ CharType PLAYER = "\u2573";
 // Tile Characters
 CharType HIDDEN_TILE = "\u2591";
 CharType EMPTY_TILE = "\u2592";
+CharType ENEMY_TILE = "\u2593";
 }

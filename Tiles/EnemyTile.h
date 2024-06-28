@@ -26,4 +26,6 @@ protected:
 	virtual void handlePlayersTurn(TileMediator&) = 0;
 	virtual void handleTilesTurn(TileMediator&) = 0;
 	virtual void handleTilesDeath(TileMediator&) = 0;
+	
+	virtual void setRootParent(EnemyTile* root) = 0;
 };

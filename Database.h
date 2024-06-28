@@ -36,6 +36,7 @@
 enum class TILES
 {
 	EMPTY,
+	ENEMY,
 	COUNT // Do not use
 };
 

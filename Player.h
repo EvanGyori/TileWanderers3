@@ -19,8 +19,15 @@ class Player
 public:
 	Player(int x, int y);
 	
+	void changeHp(int deltaHp);
 	void changeX(int deltaX);
 	void changeY(int deltaY);
+	
+	/*
+	 Damages this player taking into account the shield.
+	 Returns the resulting damage.
+	*/
+	int attack(int damage);
 	
 	// Appends a consumable item to the inventory list
 	void addItemToInventory(const Consumable*);
@@ -40,6 +47,12 @@ public:
 	int getHp() const;
 	
 	unsigned int getGold() const;
+	
+	/*
+	 Returns damage as determined by weapon.
+	 Returns zero if the player has no weapon.
+	*/
+	int computeAttackDamage() const;
 	
 	const Consumable* getInventoryItem(unsigned int index) const;
 	int getInventorySize() const;

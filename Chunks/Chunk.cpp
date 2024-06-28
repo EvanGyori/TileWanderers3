@@ -73,17 +73,20 @@ void Chunk::generate(const Tile** tilePrototypes, double* probabilities, int len
 		for (int j = 0; j < SIZE; j++) {
 			double rand = MyToolkit::randomDouble();
 			for (int k = 0; k < len; k++) {
+				assert(tilePrototypes[k] != nullptr && probabilities[k] >= 0);
 				if (rand <= probabilities[k]) {
-					assert(tilePrototypes[k] != nullptr && probabilities[k] >= 0);
 					tiles[i][j] = tilePrototypes[k]->clone();
 					break;
 				} else {
 					rand -= probabilities[k];
 				}
 				
+				/* Due to potential rounding errors from floating point types, a tile is picked anyways
 				// By the end of the list, a tile should have been choosen.
 				// If the assert fails, than the sum of the probabilities is less than 1
 				assert(k != len - 1);
+				*/
+				tiles[i][j] = tilePrototypes[k]->clone();
 			}
 		}
 	}

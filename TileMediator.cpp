@@ -31,7 +31,8 @@ void TileMediator::clearConsole() const
 void TileMediator::pauseConsole() const
 {
 	std::cout << "Press enter to continue...";
-	std::cin.get();
+	std::string x;
+	std::getline(std::cin, x);
 }
 
 void TileMediator::printMap() const
@@ -99,7 +100,7 @@ void TileMediator::printBattle(EnemyTile* tile) const
 bool TileMediator::handleMovementInput()
 {
 	std::string inputStr;
-	std::cin >> inputStr;
+	std::getline(std::cin, inputStr);
 	const char* input = &inputStr[0];
 	bool moved = true;
 	if (bindings.checkInput(BINDINGS::MOVE_UP, input)) {
@@ -126,7 +127,7 @@ bool TileMediator::handleInventoryInput(const Consumable** itemUsed)
 	if (itemUsed != nullptr)
 		(*itemUsed) = nullptr;
 	std::string input;
-	std::cin >> input;
+	std::getline(std::cin, input);
 	int index = 0;
 	try {
 		int index = std::stoi(input);
@@ -149,7 +150,7 @@ bool TileMediator::handleInventoryInput(const Consumable** itemUsed)
 bool TileMediator::handleBattleInput(EnemyTile* tile)
 {
 	std::string inputStr;
-	std::cin >> inputStr;
+	std::getline(std::cin, inputStr);
 	const char* input = &inputStr[0];
 	if (bindings.checkInput(BINDINGS::OPEN_INVENTORY, input)) {
 		const Consumable* itemUsed;

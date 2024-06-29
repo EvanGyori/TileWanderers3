@@ -9,6 +9,9 @@
 class EnemyTileImpl : public EnemyTile
 {
 public:
+	/*
+	 When this tile's hp is less than or equal to zero, the tile prototype, onDeathReplacement, replaces this tile in the chunk
+	*/
 	EnemyTileImpl(const char* name, int maxHp, int damage, const Tile* onDeathReplacement);
 	
 	Tile* clone() const;

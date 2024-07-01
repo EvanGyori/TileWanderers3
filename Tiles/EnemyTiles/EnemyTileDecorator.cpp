@@ -1,22 +1,37 @@
 #include "EnemyTileDecorator.h"
 
 #include <string>
+#include <cassert>
 
+#include "Tile.h"
 #include "EnemyTile.h"
 #include "TileMediator.h"
 
-namespace abilities
+namespace Abilities
 {
 
 EnemyTileDecorator::EnemyTileDecorator(EnemyTile* next) :
 	next(next)
 {
+	assert(next != nullptr);
 	next->setRootParent(this);
 }
 
 EnemyTileDecorator::~EnemyTileDecorator()
 {
 	delete next;
+}
+
+Tile* EnemyTileDecorator::clone() const
+{
+	Tile* nextClone = next->clone();
+	assert(dynamic_cast<EnemyTile*>(nextClone) != nullptr);
+	return new EnemyTileDecorator(static_cast<EnemyTile*>(nextClone));
+}
+
+const char* EnemyTileDecorator::getCharacter() const
+{
+	return next->getCharacter();
 }
 
 void EnemyTileDecorator::changeHp(int deltaHp)
@@ -67,6 +82,12 @@ void EnemyTileDecorator::handleTilesDeath(TileMediator& mediator)
 void EnemyTileDecorator::setRootParent(EnemyTile* root)
 {
 	next->setRootParent(root);
+}
+
+std::string EnemyTileDecorator::concatenateAbility(std::string ability)
+{
+	std::string otherAbilities = getAbilities();
+	return (otherAbilities == "") ? ability : (ability + ";" + otherAbilities);
 }
 
 }

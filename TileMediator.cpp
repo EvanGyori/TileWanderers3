@@ -162,7 +162,7 @@ bool TileMediator::handleBattleInput(EnemyTile* tile)
 		if (itemUsed != nullptr) {
 			clearConsole();
 			std::string message = "Player consumed " + std::string(itemUsed->getName()) + "\n";
-			print(message, defaultPrintSpeed);
+			print(message, DEFAULT_PRINT_SPEED);
 			pauseConsole();
 		}
 		
@@ -173,7 +173,7 @@ bool TileMediator::handleBattleInput(EnemyTile* tile)
 		tile->changeHp(-1 * damage);
 		clearConsole();
 		std::string message = "Player damaged tile for " + std::to_string(damage) + " health\n";
-		print(message, defaultPrintSpeed);
+		print(message, DEFAULT_PRINT_SPEED);
 		pauseConsole();
 		return true;
 	}
@@ -208,7 +208,7 @@ void TileMediator::attackPlayer(int damage)
 	damage = player.attack(damage);
 	clearConsole();
 	std::string message = "Player was attacked for " + std::to_string(damage) + " health\n";
-	print(message, defaultPrintSpeed);
+	print(message, DEFAULT_PRINT_SPEED);
 	pauseConsole();
 }
 

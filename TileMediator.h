@@ -25,6 +25,8 @@ class Consumable;
 class TileMediator
 {
 public:
+	static const unsigned int DEFAULT_PRINT_SPEED = 10;
+
 	TileMediator(World& world, Player& player, InputBindings& bindings);
 
 	void clearConsole() const;
@@ -71,8 +73,9 @@ public:
 	// Sets the tile that the player is on to a copy of prototype
 	void setCurrentTile(const Tile* prototype);
 	
+	void print(std::string text, unsigned int millisecondsPerChar = 0) const;
+	
 private:
-	static const unsigned int defaultPrintSpeed = 10;
 
 	World& world;
 	Player& player;
@@ -80,6 +83,4 @@ private:
 	
 	// Distance from center to edge
 	unsigned int mapInradius;
-	
-	void print(std::string text, unsigned int millisecondsPerChar = 0) const;
 };

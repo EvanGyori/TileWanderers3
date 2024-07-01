@@ -5,6 +5,9 @@
 #include "EnemyTile.h"
 #include "TileMediator.h"
 
+namespace abilities
+{
+
 EnemyTileDecorator::EnemyTileDecorator(EnemyTile* next) :
 	next(next)
 {
@@ -64,4 +67,6 @@ void EnemyTileDecorator::handleTilesDeath(TileMediator& mediator)
 void EnemyTileDecorator::setRootParent(EnemyTile* root)
 {
 	next->setRootParent(root);
+}
+
 }

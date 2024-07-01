@@ -5,6 +5,9 @@
 #include "EnemyTile.h"
 #include "TileMediator.h"
 
+namespace Abilities
+{
+
 class EnemyTileDecorator : public EnemyTile
 {
 public:
@@ -30,3 +33,5 @@ protected:
 private:
 	EnemyTile* next;
 };
+
+}

@@ -84,7 +84,7 @@ void EnemyTileDecorator::setRootParent(EnemyTile* root)
 	next->setRootParent(root);
 }
 
-std::string EnemyTileDecorator::concatenateAbility(std::string ability)
+std::string EnemyTileDecorator::concatenateAbility(std::string ability) const
 {
 	std::string otherAbilities = getAbilities();
 	return (otherAbilities == "") ? ability : (ability + ";" + otherAbilities);

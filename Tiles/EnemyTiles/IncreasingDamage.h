@@ -17,7 +17,7 @@ class IncreasingDamage : public EnemyTileDecorator
 {
 public:
 	// incrementAmount is the amount the tile's damage increases each turn after it attacks.
-	IncreasingDamage(int incrementAmount);
+	IncreasingDamage(int incrementAmount, EnemyTile* next);
 	
 	int getDamage() const;
 	std::string getAbilities() const;

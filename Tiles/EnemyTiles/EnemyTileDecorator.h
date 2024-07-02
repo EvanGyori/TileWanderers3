@@ -1,3 +1,9 @@
+/*
+ Subclasses of EnemyTileDecorator tack on functionality to EnemyTile classes to add new abilities and layers.
+ To instantiate an EnemyTile with some decorators, pass in the instance pointer of EnemyTile to the decorator's constructor
+ and that decorator is passed in to the next decorator's constructor and so on for as many decorators as needed.
+*/
+
 #pragma once
 
 #include <string>
@@ -27,14 +33,14 @@ public:
 	virtual int getDamage() const;
 	virtual std::string getAbilities() const;
 	
-protected:
 	virtual void handlePlayersTurn(TileMediator&);
 	virtual void handleTilesTurn(TileMediator&);
 	virtual void handleTilesDeath(TileMediator&);
 	
 	void setRootParent(EnemyTile* root);
 	
-	std::string concatenateAbility(std::string ability);
+protected:
+	std::string concatenateAbility(std::string ability) const;
 	
 private:
 	EnemyTile* next;

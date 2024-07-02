@@ -25,7 +25,6 @@ public:
 	int getDamage() const;
 	std::string getAbilities() const;
 	
-protected:
 	void handlePlayersTurn(TileMediator&);
 	void handleTilesTurn(TileMediator&);
 	void handleTilesDeath(TileMediator&);

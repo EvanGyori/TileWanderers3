@@ -28,7 +28,6 @@ public:
 	*/
 	virtual std::string getAbilities() const = 0;
 	
-protected:
 	// Handles the beginning of a battle with a player's input.
 	virtual void handlePlayersTurn(TileMediator&) = 0;
 	

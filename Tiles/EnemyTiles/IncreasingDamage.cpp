@@ -1,15 +1,15 @@
 #include "IncreasingDamage.h"
 
-#include <format>
+#include <string>
 
 namespace Abilities
 {
 
-IncreasingDamage::IncreasingDamage(int incrementAmount) :
+IncreasingDamage::IncreasingDamage(int incrementAmount, EnemyTile* next) :
 	damageCounter(0),
-	incrementAmount(incrementAmount)
+	incrementAmount(incrementAmount),
+	EnemyTileDecorator(next)
 {
-
 }
 
 int IncreasingDamage::getDamage() const
@@ -19,15 +19,17 @@ int IncreasingDamage::getDamage() const
 
 std::string IncreasingDamage::getAbilities() const
 {
-	return concatenateAbilities(std::format("+{} attack damage each round", incrementAmount));
+	std::string ability = "+" + std::to_string(incrementAmount) + " attack damage each round";
+	return concatenateAbility(ability);
 }
 
-void handleTilesTurn(TileMediator& mediator)
+void IncreasingDamage::handleTilesTurn(TileMediator& mediator)
 {
 	EnemyTileDecorator::handleTilesTurn(mediator);
 	damageCounter += incrementAmount;
 	mediator.clearConsole();
-	mediator.print(std::format("The tile's damage increased by {}\n", incrementAmount), TileMediator::DEFAULT_PRINT_SPEED);
+	std::string message = "The tile's damage increased by " + std::to_string(incrementAmount) + "\n";
+	mediator.print(message, TileMediator::DEFAULT_PRINT_SPEED);
 	mediator.pauseConsole();
 }
 

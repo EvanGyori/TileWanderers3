@@ -17,16 +17,14 @@ EnemyTileDecorator::EnemyTileDecorator(EnemyTile* next) :
 	next->setRootParent(this);
 }
 
+EnemyTileDecorator::EnemyTileDecorator(const EnemyTileDecorator& rhs) :
+	EnemyTileDecorator(dynamic_cast<EnemyTile*>(rhs.next->clone()))
+{
+}
+
 EnemyTileDecorator::~EnemyTileDecorator()
 {
 	delete next;
-}
-
-Tile* EnemyTileDecorator::clone() const
-{
-	Tile* nextClone = next->clone();
-	assert(dynamic_cast<EnemyTile*>(nextClone) != nullptr);
-	return new EnemyTileDecorator(static_cast<EnemyTile*>(nextClone));
 }
 
 const char* EnemyTileDecorator::getCharacter() const

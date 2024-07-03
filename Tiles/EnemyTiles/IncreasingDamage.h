@@ -19,6 +19,8 @@ public:
 	// incrementAmount is the amount the tile's damage increases each turn after it attacks.
 	IncreasingDamage(int incrementAmount, EnemyTile* next);
 	
+	Tile* clone() const;
+	
 	int getDamage() const;
 	std::string getAbilities() const;
 	

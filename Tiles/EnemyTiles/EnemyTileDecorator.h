@@ -19,10 +19,10 @@ class EnemyTileDecorator : public EnemyTile
 {
 public:
 	EnemyTileDecorator(EnemyTile* next);
+	EnemyTileDecorator(const EnemyTileDecorator&);
 	
 	virtual ~EnemyTileDecorator();
 	
-	virtual Tile* clone() const;
 	virtual const char* getCharacter() const;
 	
 	virtual void changeHp(int deltaHp);

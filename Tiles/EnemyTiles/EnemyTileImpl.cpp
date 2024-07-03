@@ -17,9 +17,19 @@ EnemyTileImpl::EnemyTileImpl(const char* name, int maxHp, int damage, const Tile
 {
 }
 
+EnemyTileImpl::EnemyTileImpl(const EnemyTileImpl& rhs) :
+	root(this),
+	name(rhs.name),
+	hp(rhs.hp),
+	maxHp(rhs.maxHp),
+	damage(rhs.damage),
+	onDeathReplacement(rhs.onDeathReplacement)
+{
+}
+
 Tile* EnemyTileImpl::clone() const
 {
-	return new EnemyTileImpl(name, maxHp, damage, onDeathReplacement);
+	return new EnemyTileImpl(*this);
 }
 
 const char* EnemyTileImpl::getCharacter() const

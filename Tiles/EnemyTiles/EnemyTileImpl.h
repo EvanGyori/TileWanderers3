@@ -14,6 +14,8 @@ public:
 	*/
 	EnemyTileImpl(const char* name, int maxHp, int damage, const Tile* onDeathReplacement);
 	
+	EnemyTileImpl(const EnemyTileImpl&);
+	
 	Tile* clone() const;
 	const char* getCharacter() const;
 

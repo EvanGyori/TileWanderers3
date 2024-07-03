@@ -12,6 +12,11 @@ IncreasingDamage::IncreasingDamage(int incrementAmount, EnemyTile* next) :
 {
 }
 
+Tile* IncreasingDamage::clone() const
+{
+	return new IncreasingDamage(*this);
+}
+
 int IncreasingDamage::getDamage() const
 {
 	return damageCounter + EnemyTileDecorator::getDamage();

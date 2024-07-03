@@ -36,7 +36,7 @@
 enum class TILES
 {
 	EMPTY,
-	ENEMY,
+	MUTATED_RAT,
 	COUNT // Do not use
 };
 

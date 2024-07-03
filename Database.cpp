@@ -5,6 +5,7 @@
 #include "EnemyTileImpl.h"
 #include "Item.h"
 #include "Weapon.h"
+#include "IncreasingDamage.h"
 
 #include <cassert>
 
@@ -51,7 +52,9 @@ void Database::createTiles()
 {
 	addTile(TILES::EMPTY, new EmptyTile);
 	
-	addTile(TILES::ENEMY, new EnemyTileImpl("Test Enemy", 100, 10, getTile(TILES::EMPTY)));
+	addTile(TILES::MUTATED_RAT, 
+		new Abilities::IncreasingDamage(1,
+			new EnemyTileImpl("Mutated Rat", 100, 10, getTile(TILES::EMPTY))));
 }
 
 void Database::createItems()

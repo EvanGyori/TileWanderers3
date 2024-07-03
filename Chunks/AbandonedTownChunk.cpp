@@ -10,7 +10,7 @@ AbandonedTownChunk::AbandonedTownChunk()
 {
 	// Temp - creates a chunk full of empty tiles
 	Database& database = Database::getInstance();
-	const Tile* tiles[] = { database.getTile(TILES::EMPTY), database.getTile(TILES::ENEMY) };
+	const Tile* tiles[] = { database.getTile(TILES::EMPTY), database.getTile(TILES::MUTATED_RAT) };
 	
 	double probabilities[] = {0.8, 0.2};
 	Chunk::generate(tiles, probabilities, 2);

@@ -18,6 +18,7 @@ enum class BINDINGS
 	OPEN_INVENTORY,
 	EXIT_INVENTORY,
 	ATTACK,
+	RETREAT,
 	COUNT // Do not use
 };
 

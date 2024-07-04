@@ -30,4 +30,5 @@ void InputBindings::setDefaultBindings()
 	setBinding(BINDINGS::OPEN_INVENTORY, "q");
 	setBinding(BINDINGS::EXIT_INVENTORY, "q");
 	setBinding(BINDINGS::ATTACK, "e");
+	setBinding(BINDINGS::RETREAT, "r");
 }

@@ -176,6 +176,13 @@ bool TileMediator::handleBattleInput(EnemyTile* tile)
 		print(message, DEFAULT_PRINT_SPEED);
 		pauseConsole();
 		return true;
+	} else if (bindings.checkInput(BINDINGS::RETREAT, input)) {
+		do {
+			clearConsole();
+			printMap();
+			print("Choose where to retreat\n");
+		} while (!handleMovementInput());
+		return true;
 	}
 	
 	return false;

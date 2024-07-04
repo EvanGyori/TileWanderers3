@@ -23,7 +23,6 @@ void GameManager::run()
 	tileMediator.revealArea(player.getX(), player.getY(), player.getSightRadius());
 	world.setTile(player.getX(), player.getY(), Database::getInstance().getTile(TILES::EMPTY));
 	while (player.getHp() > 0) {
-		world.cleanupReplacedTiles();
 		update();
 	}
 	quit();
@@ -32,10 +31,12 @@ void GameManager::run()
 void GameManager::menu()
 {
 	// TODO
+	Database::getInstance().getItem(ITEMS::SWORD)->equip(player);
 }
 
 void GameManager::update()
 {
+	world.cleanupReplacedTiles();
 	world.getTile(player.getX(), player.getY())->update(tileMediator);
 }
 

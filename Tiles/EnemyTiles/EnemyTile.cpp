@@ -7,9 +7,10 @@ EnemyTile::~EnemyTile()
 void EnemyTile::update(TileMediator& mediator)
 {
 	handlePlayersTurn(mediator);
-	handleTilesTurn(mediator);
-		
-	if (getHp() <= 0) {
+	
+	if (getHp() > 0) {
+		handleTilesTurn(mediator);
+	} else {
 		handleTilesDeath(mediator);
 	}
 }

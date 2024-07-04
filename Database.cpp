@@ -54,12 +54,12 @@ void Database::createTiles()
 	
 	addTile(TILES::MUTATED_RAT, 
 		new Abilities::IncreasingDamage(1,
-			new EnemyTileImpl("Mutated Rat", 100, 10, getTile(TILES::EMPTY))));
+			new EnemyTileImpl("Mutated Rat", 50, 10, getTile(TILES::EMPTY))));
 }
 
 void Database::createItems()
 {
-	addItem(ITEMS::SWORD, new Weapon("Sword", 1, 0.5, 2.));
+	addItem(ITEMS::SWORD, new Weapon("Sword", 10, 0.5, 2.));
 }
 
 void Database::addTile(TILES id, Tile* tile)

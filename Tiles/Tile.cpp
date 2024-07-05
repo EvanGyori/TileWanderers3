@@ -24,5 +24,5 @@ void Tile::handleMapUpdate(TileMediator& mediator)
 	do {
 		mediator.clearConsole();
 		mediator.printMap();
-	} while (!mediator.handleMovementInput());
+	} while (!mediator.handleMovementInput(true));
 }

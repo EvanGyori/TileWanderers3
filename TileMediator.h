@@ -46,7 +46,7 @@ public:
 	 Asks the user for movement input and moves the player in that direction.
 	 Returns false if an invalid input is given.
 	*/
-	bool handleMovementInput();
+	bool handleMovementInput(bool hasInventoryAccess = false);
 	
 	/*
 	 Asks the user for inventory input to either use an item or exit the inventory.
@@ -83,4 +83,10 @@ private:
 	
 	// Distance from center to edge
 	unsigned int mapInradius;
+	
+	/*
+	 Handles printing the inventory, taking input, and if the player consumed an item, printing that too.
+	 Returns true if a player used an item, false otherwise.
+	*/
+	bool handleInventory();
 };

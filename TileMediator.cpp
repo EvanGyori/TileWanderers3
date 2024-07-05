@@ -97,7 +97,7 @@ void TileMediator::printBattle(EnemyTile* tile) const
 	print("\n");
 }
 
-bool TileMediator::handleMovementInput()
+bool TileMediator::handleMovementInput(bool hasInventoryAccess)
 {
 	std::string inputStr;
 	std::getline(std::cin, inputStr);
@@ -113,6 +113,9 @@ bool TileMediator::handleMovementInput()
 		player.changeX(1);
 	} else {
 		moved = false;
+		if (hasInventoryAccess && bindings.checkInput(BINDINGS::OPEN_INVENTORY, input)) {
+			return handleInventory();
+		}
 	}
 	
 	if (moved) {
@@ -153,21 +156,7 @@ bool TileMediator::handleBattleInput(EnemyTile* tile)
 	std::getline(std::cin, inputStr);
 	const char* input = &inputStr[0];
 	if (bindings.checkInput(BINDINGS::OPEN_INVENTORY, input)) {
-		const Consumable* itemUsed;
-		do {
-			clearConsole();
-			printInventory();
-		} while (!handleInventoryInput(&itemUsed));
-		
-		if (itemUsed != nullptr) {
-			clearConsole();
-			std::string message = "Player consumed " + std::string(itemUsed->getName()) + "\n";
-			print(message, DEFAULT_PRINT_SPEED);
-			pauseConsole();
-		}
-		
-		// Returns false if no item was used so that the player may choose to do something else
-		return itemUsed != nullptr;
+		return handleInventory();
 	} else if (bindings.checkInput(BINDINGS::ATTACK, input)) {
 		int damage = player.computeAttackDamage();
 		tile->changeHp(-1 * damage);
@@ -237,4 +226,24 @@ void TileMediator::print(std::string text, unsigned int millisecondsPerChar) con
 			std::cout << *it << std::flush;
 		}
 	}
+}
+
+bool TileMediator::handleInventory()
+{
+	const Consumable* itemUsed;
+	do {
+		clearConsole();
+		printInventory();
+	} while (!handleInventoryInput(&itemUsed));
+	
+	// Player consumed item
+	if (itemUsed != nullptr) {
+		clearConsole();
+		std::string message = "Player consumed " + std::string(itemUsed->getName()) + "\n";
+		print(message, DEFAULT_PRINT_SPEED);
+		pauseConsole();
+	}
+	
+	// Returns false if no item was used so that the player may choose to do something else
+	return itemUsed != nullptr;
 }

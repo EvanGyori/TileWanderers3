@@ -8,7 +8,7 @@ function(add_sources target)
 endfunction()
 
 add_executable(Debug main.cpp World.cpp Player.cpp Database.cpp InputBindings.cpp TileMediator.cpp GameManager.cpp)
-target_include_directories(Debug PRIVATE . /usr/local/include/MyToolkit)
+target_include_directories(Debug PRIVATE .)
 target_link_libraries(Debug MyToolkit)
 
 #add_subdirectory(/home/evan/projects/c++/MyToolkit/source MyToolkit)

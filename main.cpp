@@ -5,6 +5,8 @@
 
 #include "GameManager.h"
 
+#include "Database.h"
+
 int main()
 {
 	GameManager game;

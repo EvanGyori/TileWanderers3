@@ -45,6 +45,7 @@ Database::Database(const Database&)
 
 Database::~Database()
 {
+	assert(false);
 	// Never called, singleton
 }
 
